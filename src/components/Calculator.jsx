@@ -16,27 +16,36 @@ const Calculator = () => {
   };
 
   const handleOperatorClick = (op) => {
-    if (op === "=") {
-      if (operator === "+") {
-        setResult(parseInt(num1) + parseInt(num2));
-      } else if (operator === "-") {
-        setResult(parseInt(num1) - parseInt(num2));
-      } else if (operator === "*") {
-        setResult(parseInt(num1) * parseInt(num2));
-      } else if (operator === "/") {
-        setResult(parseInt(num1) / parseInt(num2));
-      }
-      setNum1("");
-      setNum2("");
-      setOperator("");
-    } else {
-      setOperator(op);
-      setNum1(result !== "" ? result : num1);
-      setNum2("");
-      setResult("");
+    switch (op) {
+      case "=":
+        switch (operator) {
+          case "+":
+            setResult(parseInt(num1) + parseInt(num2));
+            break;
+          case "-":
+            setResult(parseInt(num1) - parseInt(num2));
+            break;
+          case "*":
+            setResult(parseInt(num1) * parseInt(num2));
+            break;
+          case "/":
+            setResult(parseInt(num1) / parseInt(num2));
+            break;
+          default:
+            break;
+        }
+        setNum1("");
+        setNum2("");
+        setOperator("");
+        break;
+      default:
+        setOperator(op);
+        setNum1(result !== "" ? result : num1);
+        setNum2("");
+        setResult("");
+        break;
     }
   };
-
   const clear = () => {
     setResult("");
   };
