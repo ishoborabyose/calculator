@@ -1,10 +1,6 @@
-const Button = ({ style, name, info, onclick }) => {
+const Button = ({ style, info, onclick }) => {
   return (
-    <button
-      onClick={onclick}
-      name={name}
-      className={`p-10 w-full   border-2 ${style}`}
-    >
+    <button onClick={onclick} className={`p-10 w-full   border-2 ${style}`}>
       {" "}
       {info}
     </button>

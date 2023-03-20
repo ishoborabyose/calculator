@@ -1,22 +1,46 @@
-/* eslint no-eval: 0 */
 import { useState } from "react";
 import Button from "./Button";
 
 const Calculator = () => {
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
+  const [operator, setOperator] = useState("");
   const [result, setResult] = useState("");
-  const handleClick = (event) => {
-    setResult(result.concat(event.target.name));
+
+  const handleNumClick = (num) => {
+    if (operator === "") {
+      setNum1(num1 + num);
+    } else {
+      setNum2(num2 + num);
+    }
   };
+
+  const handleOperatorClick = (op) => {
+    if (op === "=") {
+      if (operator === "+") {
+        setResult(parseInt(num1) + parseInt(num2));
+      } else if (operator === "-") {
+        setResult(parseInt(num1) - parseInt(num2));
+      } else if (operator === "*") {
+        setResult(parseInt(num1) * parseInt(num2));
+      } else if (operator === "/") {
+        setResult(parseInt(num1) / parseInt(num2));
+      }
+      setNum1("");
+      setNum2("");
+      setOperator("");
+    } else {
+      setOperator(op);
+      setNum1(result !== "" ? result : num1);
+      setNum2("");
+      setResult("");
+    }
+  };
+
   const clear = () => {
     setResult("");
   };
-  const calculate = () => {
-    try {
-      setResult(eval(result).toString());
-    } catch (error) {
-      setResult("Error");
-    }
-  };
+
   return (
     <div className="App max-w-2xl  mx-auto py-10">
       <div className="max-w-sm mx-auto">
@@ -24,7 +48,8 @@ const Calculator = () => {
           <input
             className="bg-[#7B7A89]  text-right px-3 w-full py-6 text-white text-xl font-bold leading-8"
             type="text"
-            value={result === "" ? "0" : result}
+            // value={result === "" ? "0" : result}
+            value={result !== "" ? result : num2 !== "" ? num2 : num1}
           />
         </form>
         <div className={`grid  grid-cols-4`}>
@@ -36,118 +61,100 @@ const Calculator = () => {
           />
 
           <Button
-            onclick={handleClick}
-            name="+/-"
+            onclick={() => handleOperatorClick("+/-")}
             info="+/-"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="%"
+            onclick={() => handleOperatorClick("%")}
             info="%"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="/"
+            onclick={() => handleOperatorClick("/")}
             info="÷"
             style={`${" bg-[#F48637] text-white"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="7"
+            onclick={() => handleNumClick("7")}
             info="7"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={handleClick}
-            name="8"
+            onclick={() => handleNumClick("8")}
             info="8"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={handleClick}
-            name="9"
+            onclick={() => handleNumClick("9")}
             info="9"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={handleClick}
-            name="*"
+            onclick={() => handleOperatorClick("*")}
             info="x"
             style={`${"bg-[#F48637] text-white"}`}
           />
           <Button
-            onclick={handleClick}
-            name="4"
+            onclick={() => handleNumClick("4")}
             info="4"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="5"
+            onclick={() => handleNumClick("5")}
             info="5"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={handleClick}
-            name="6"
+            onclick={() => handleNumClick("6")}
             info="6"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="-"
+            onclick={() => handleOperatorClick("-")}
             info="-"
             style={`${"bg-[#F48637] text-white"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="1"
+            onclick={() => handleNumClick("1")}
             info="1"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="2"
+            onclick={() => handleNumClick("2")}
             info="2"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={handleClick}
-            name="3"
+            onclick={() => handleNumClick("3")}
             info="3"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={handleClick}
-            name="+"
+            onclick={() => handleOperatorClick("+")}
             info="+"
             style={`${"bg-[#F48637] text-white"}`}
           />
           <Button
-            onclick={handleClick}
-            name="0"
+            onclick={() => handleNumClick("0")}
             info="0"
             style={`${"col-span-2 bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={handleClick}
-            name="."
+            onclick={() => handleNumClick(".")}
             info="."
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
           <Button
-            onclick={calculate}
-            name="="
+            onclick={() => handleOperatorClick("=")}
             info="="
             style={`${"bg-[#F48637]  text-white"}`}
           />
