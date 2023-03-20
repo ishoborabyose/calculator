@@ -48,7 +48,6 @@ const Calculator = () => {
           <input
             className="bg-[#7B7A89]  text-right px-3 w-full py-6 text-white text-xl font-bold leading-8"
             type="text"
-            // value={result === "" ? "0" : result}
             value={result !== "" ? result : num2 !== "" ? num2 : num1}
           />
         </form>
