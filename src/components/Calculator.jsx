@@ -18,22 +18,25 @@ const Calculator = () => {
   const handleOperatorClick = (op) => {
     switch (op) {
       case "=":
-        switch (operator) {
-          case "+":
-            setResult(parseInt(num1) + parseInt(num2));
-            break;
-          case "-":
-            setResult(parseInt(num1) - parseInt(num2));
-            break;
-          case "*":
-            setResult(parseInt(num1) * parseInt(num2));
-            break;
-          case "/":
-            setResult(parseInt(num1) / parseInt(num2));
-            break;
-          default:
-            break;
+        if (num1 !== "" && num2 !== "") {
+          switch (operator) {
+            case "+":
+              setResult(parseFloat(num1) + parseFloat(num2));
+              break;
+            case "-":
+              setResult(parseFloat(num1) - parseFloat(num2));
+              break;
+            case "*":
+              setResult(parseFloat(num1) * parseFloat(num2));
+              break;
+            case "/":
+              setResult(parseFloat(num1) / parseFloat(num2));
+              break;
+            default:
+              break;
+          }
         }
+
         setNum1("");
         setNum2("");
         setOperator("");
@@ -53,11 +56,19 @@ const Calculator = () => {
   };
 
   const handlePercentageButtonClick = () => {
-    setResult(parseInt(num1) / 100 || parseInt(num2) / 100 || result / 100);
+    setResult(parseFloat(num1) / 100 || parseFloat(num2) / 100 || result / 100);
   };
 
   const handlePlusMinusButtonClick = () => {
-    setResult(parseInt(num1) * -1 || parseInt(num2) * -1 || result * -1);
+    if (num1 && operator) {
+      setNum2(parseFloat(num2) * -1);
+    } else {
+      if (num1 === "") {
+        setNum1("-");
+      } else {
+        setNum1(parseFloat(num1) * -1);
+      }
+    }
   };
 
   return (
