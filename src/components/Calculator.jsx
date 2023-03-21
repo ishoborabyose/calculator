@@ -48,6 +48,16 @@ const Calculator = () => {
   };
   const clear = () => {
     setResult("");
+    setNum1("");
+    setNum2("");
+  };
+
+  const handlePercentageButtonClick = () => {
+    setResult(parseInt(num1) / 100 || parseInt(num2) / 100 || result / 100);
+  };
+
+  const handlePlusMinusButtonClick = () => {
+    setResult(parseInt(num1) * -1 || parseInt(num2) * -1 || result * -1);
   };
 
   return (
@@ -69,13 +79,13 @@ const Calculator = () => {
           />
 
           <Button
-            onclick={() => handleOperatorClick("+/-")}
+            onclick={() => handlePlusMinusButtonClick("+/-")}
             info="+/-"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
 
           <Button
-            onclick={() => handleOperatorClick("%")}
+            onclick={() => handlePercentageButtonClick("%")}
             info="%"
             style={`${"bg-[#DCDBDC] text-black"}`}
           />
